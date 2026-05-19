@@ -1,55 +1,24 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
-
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyCsiFyyZItNL5r4s_r6QMl3-LEAZuNN6d8",
+  authDomain: "todoapp-5a5b7.firebaseapp.com",
+  projectId: "todoapp-5a5b7",
+  storageBucket: "todoapp-5a5b7.firebasestorage.app",
+  messagingSenderId: "200668242027",
+  appId: "1:200668242027:web:541619e9fd59eb51fd512e",
+  measurementId: "G-110DDKB4VK"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// SAVE DATA
-async function saveTask(taskText) {
-  try {
-    await addDoc(collection(db, "tasks"), {
-      task: taskText,
-      created: new Date()
-    });
-
-    alert("Task Saved!");
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-// EXAMPLE BUTTON
-document.getElementById("addBtn").addEventListener("click", () => {
-  let task = document.getElementById("taskInput").value;
-
-  saveTask(task);
-});
-
-// SHOW DATA
-async function loadTasks() {
-  const querySnapshot = await getDocs(collection(db, "tasks"));
-
-  querySnapshot.forEach((doc) => {
-    console.log(doc.data());
-  });
-}
-
-loadTasks();
+const analytics = getAnalytics(app);
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
 
