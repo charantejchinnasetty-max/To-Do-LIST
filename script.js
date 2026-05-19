@@ -1,6 +1,12 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,10 +24,21 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const db = getFirestore(app);
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
+async function saveTaskToFirebase(taskText) {
+    try {
+        await addDoc(collection(db, "tasks"), {
+            task: taskText,
+            createdAt: new Date()
+        });
 
+        console.log("Task Saved");
+    } catch (error) {
+        console.log(error);
+    }
+}
 function addTask(){
     if(inputBox.value === ""){
         alert("you must be enter something....!");  
