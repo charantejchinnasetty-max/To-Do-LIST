@@ -84,3 +84,5 @@ saveData();
 
     showData();
 
+window.addTask = addTask;
+
