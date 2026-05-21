@@ -3,26 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do List</title>
+    <title>Daily Todo Notes</title>
+
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="/images/pencil.png">
-    
+    <link rel="icon" type="image/png" href="images/pencil.png">
 </head>
+
 <body>
-    <div class="container"> <div class="todo_app">
-         <h2>Todo List <img src="images/pencil.png"></h2>
-         <div class = "row"> 
-            <input type="text" id="input-box" placeholder="Add Your Text">
-            <button onclick="addTask()">Add</button>
-          </div>
-          <ul id="list-container">
-            <!-- <li class="checked">Task 1</li>
-            <li>Task 1</li>
-            <li>Task 1</li> -->
-          </ul>
+
+    <div class="container">
+
+        <div class="todo_app">
+
+            <h2>
+                Daily Todo Notes
+                <img src="images/pencil.png">
+            </h2>
+
+            <!-- DATE PICKER -->
+            <input type="date" id="selectedDate">
+
+            <!-- INPUT ROW -->
+            <div class="row">
+
+                <input type="text"
+                       id="input-box"
+                       placeholder="Add Your Task">
+
+                <button onclick="addTask()">Add</button>
+
+            </div>
+
+            <!-- TASK LIST -->
+            <ul id="list-container"></ul>
+
         </div>
+
     </div>
+
     <script type="module" src="script.js"></script>
-    
+
 </body>
 </html>
