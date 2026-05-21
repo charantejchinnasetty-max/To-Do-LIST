@@ -125,3 +125,60 @@ ul li span{
 ul li span:hover{
     background: #edeef0;
 }
+
+/* MOBILE RESPONSIVE */
+@media screen and (max-width: 600px){
+
+    .todo_app{
+
+        margin: 40px 10px;
+        padding: 25px 15px 40px;
+    }
+
+    .todo_app h2{
+
+        font-size: 22px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .row{
+
+        flex-direction: column;
+        gap: 15px;
+        background: transparent;
+        padding-left: 0;
+    }
+
+    #input-box{
+
+        width: 100%;
+        background: #edeef0;
+        border-radius: 30px;
+        padding: 15px;
+    }
+
+    button{
+
+        width: 100%;
+        padding: 15px;
+    }
+
+    #selectedDate{
+
+        width: 100%;
+    }
+
+    ul li{
+
+        font-size: 15px;
+        padding: 12px 8px 12px 45px;
+    }
+
+    ul li span{
+
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+    }
+}
