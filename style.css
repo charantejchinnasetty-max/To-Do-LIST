@@ -6,12 +6,11 @@
 }
 
 .container{
-    width: 100%;
+    width: 100;
     min-height: 100vh;
     background: linear-gradient(135deg, #153677, #4e085f);
     padding: 10px;
 }
-
 .todo_app{
     width: 100%;
     max-width: 540px;
@@ -19,6 +18,7 @@
     margin: 100px auto 20px;
     padding: 40px 30px 70px;
     border-radius: 10px;
+
 }
 
 .todo_app h2{
@@ -26,26 +26,13 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-}
 
+}
 .todo_app h2 img{
     width: 30px;
     margin-left: 10px;
-}
 
-/* DATE PICKER */
-#selectedDate{
-    width: 100%;
-    padding: 15px;
-    border: none;
-    outline: none;
-    background: #edeef0;
-    border-radius: 30px;
-    margin-bottom: 20px;
-    font-size: 16px;
 }
-
-/* INPUT ROW */
 .row{
     display: flex;
     align-items: center;
@@ -55,16 +42,12 @@
     padding-left: 20px;
     margin-bottom: 25px;
 }
-
 input{
     flex: 1;
     border: none;
     outline: none;
     background: transparent;
-    padding: 15px;
-    font-size: 16px;
 }
-
 button{
     border: none;
     outline: none;
@@ -76,7 +59,6 @@ button{
     border-radius: 40px;
 }
 
-/* TASKS */
 ul li{
     list-style: none;
     font-size: 17px;
@@ -85,43 +67,42 @@ ul li{
     cursor: pointer;
     position: relative;
 }
+ul li::before{ 
+ content: "";
+ position: absolute;
+ height: 28px;
+ width: 28px;
+ border-radius: 50%;
+ background-image: url(images/radio.png);
+ background-size: cover;
+ background-position: center;
+ top: 12px;
+ left: 8px;
 
-ul li::before{
-    content: "";
-    position: absolute;
-    height: 28px;
-    width: 28px;
-    border-radius: 50%;
-    background-image: url(images/radio.png);
-    background-size: cover;
-    background-position: center;
-    top: 12px;
-    left: 8px;
 }
-
 ul li.checked{
     color: #555;
     text-decoration: line-through;
 }
-
 ul li.checked::before{
-    background-image: url(images/check-mark.png);
+     background-image: url(images/check-mark.png);
+
 }
 
-/* DELETE BUTTON */
 ul li span{
     position: absolute;
     right: 0;
     top: 5px;
     width: 40px;
-    height: 40px;
+    height: 40p;
     font-size: 22px;
     color: #555;
     line-height: 40px;
     text-align: center;
     border-radius: 50%;
+
 }
 
-ul li span:hover{
+ui li span :hover{
     background: #edeef0;
 }

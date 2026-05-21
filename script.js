@@ -1,160 +1,88 @@
-// FIREBASE IMPORTS
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 
 import {
-    getFirestore,
-    collection,
-    addDoc,
-    getDocs
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-
-// FIREBASE CONFIG
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_BUCKET",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyCsiFyyZItNL5r4s_r6QMl3-LEAZuNN6d8",
+  authDomain: "todoapp-5a5b7.firebaseapp.com",
+  projectId: "todoapp-5a5b7",
+  storageBucket: "todoapp-5a5b7.firebasestorage.app",
+  messagingSenderId: "200668242027",
+  appId: "1:200668242027:web:541619e9fd59eb51fd512e",
+  measurementId: "G-110DDKB4VK"
 };
 
-
-// INITIALIZE FIREBASE
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
-
-
-// ELEMENTS
 const inputBox = document.getElementById("input-box");
-
 const listContainer = document.getElementById("list-container");
-
-const selectedDate = document.getElementById("selectedDate");
-
-
-// AUTO SET TODAY DATE
-let today = new Date().toISOString().split("T")[0];
-
-selectedDate.value = today;
-
-
-// LOAD TASKS WHEN DATE CHANGES
-selectedDate.addEventListener("change", loadTasksByDate);
-
-
-// SAVE TASK TO FIREBASE
-async function saveTaskToFirebase(taskText, taskDate){
-
-    try{
-
+async function saveTaskToFirebase(taskText) {
+    try {
         await addDoc(collection(db, "tasks"), {
-
             task: taskText,
-
-            taskDate: taskDate,
-
             createdAt: new Date()
-
         });
 
         console.log("Task Saved");
-
-    }
-    catch(error){
-
+    } catch (error) {
         console.log(error);
     }
 }
-
-
-// ADD TASK
-async function addTask(){
-
+function addTask(){
     if(inputBox.value === ""){
-
-        alert("Please enter a task");
-
+        alert("you must be enter something....!");  
     }
     else{
-
-        let selectedDay = selectedDate.value;
-
-        // CREATE LI
         let li = document.createElement("li");
-
         li.innerHTML = inputBox.value;
-
         listContainer.appendChild(li);
-
-        // DELETE BUTTON
         let span = document.createElement("span");
-
         span.innerHTML = "\u00d7";
-
         li.appendChild(span);
+        saveTaskToFirebase(inputBox.value);
+        saveData();
 
-        // SAVE TO FIREBASE
-        await saveTaskToFirebase(inputBox.value, selectedDay);
 
-        inputBox.value = "";
     }
+    inputBox.value = "";
 }
 
+    listContainer.addEventListener("click", function(e){
+        if (e.target.tagName === "LI"){
+            e.target.classList.toggle("checked");
+            saveTaskToFirebase(inputBox.value);
+saveData();
 
-// CHECK / DELETE TASK
-listContainer.addEventListener("click", function(e){
-
-    // CHECK TASK
-    if(e.target.tagName === "LI"){
-
-        e.target.classList.toggle("checked");
-    }
-
-    // DELETE TASK
-    else if(e.target.tagName === "SPAN"){
-
-        e.target.parentElement.remove();
-    }
-
-}, false);
-
-
-// LOAD TASKS DATE WISE
-async function loadTasksByDate(){
-
-    listContainer.innerHTML = "";
-
-    const querySnapshot = await getDocs(collection(db, "tasks"));
-
-    querySnapshot.forEach((doc) => {
-
-        const data = doc.data();
-
-        // FILTER DATE
-        if(data.taskDate === selectedDate.value){
-
-            let li = document.createElement("li");
-
-            li.innerHTML = data.task;
-
-            // DELETE BUTTON
-            let span = document.createElement("span");
-
-            span.innerHTML = "\u00d7";
-
-            li.appendChild(span);
-
-            listContainer.appendChild(li);
         }
-    });
-}
+        else if(e.target.tagName ==="SPAN"){
+            e.target.parentElement.remove();
+            saveTaskToFirebase(inputBox.value);
+saveData();
+        }
 
+    },false);
 
-// FIRST LOAD
-loadTasksByDate();
+    function saveData(){
+        localStorage.setItem("data",listContainer.innerHTML);
 
+    }
 
-// GLOBAL FUNCTION
+    function showData(){
+        listContainer.innerHTML = localStorage.getItem("data");
+    }
+
+    showData();
+
 window.addTask = addTask;
+
